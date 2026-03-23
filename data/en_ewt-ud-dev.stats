@@ -1,0 +1,56 @@
+{
+  "dataset_id": "en_ewt-ud-dev",
+  "num_documents": 318,
+  "num_annotated_documents": 318,
+  "num_annotations": 1730,
+  "num_annotators": 2,
+  "annotator_ids": [
+    "blvns",
+    "stephen"
+  ],
+  "num_docs_with_multiple_annotators": 64,
+  "num_sentences": 2001,
+  "num_tokens": 25149,
+  "label_distribution": {
+    "LOC": 399,
+    "ORG": 224,
+    "PER": 343
+  },
+  "pairwise_f1": {
+    "ref:blvns, pred:stephen": {
+      "num_common_annotated_docs": 64,
+      "LOC": {
+        "precision": 0.7307692307692307,
+        "recall": 0.8507462686567164,
+        "f1": 0.786206896551724
+      },
+      "ORG": {
+        "precision": 0.7058823529411765,
+        "recall": 0.5853658536585366,
+        "f1": 0.64
+      },
+      "PER": {
+        "precision": 0.9537037037037037,
+        "recall": 0.944954128440367,
+        "f1": 0.9493087557603688
+      }
+    },
+    "average": {
+      "LOC": {
+        "precision": 0.7307692307692307,
+        "recall": 0.8507462686567164,
+        "f1": 0.786206896551724
+      },
+      "ORG": {
+        "precision": 0.7058823529411765,
+        "recall": 0.5853658536585366,
+        "f1": 0.64
+      },
+      "PER": {
+        "precision": 0.9537037037037037,
+        "recall": 0.944954128440367,
+        "f1": 0.9493087557603688
+      }
+    }
+  }
+}
