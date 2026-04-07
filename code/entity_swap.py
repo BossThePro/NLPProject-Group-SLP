@@ -1,4 +1,5 @@
 import re
+import string
 import pandas as pd 
 from collections import defaultdict
 from collections import Counter
@@ -92,8 +93,23 @@ def entity_count(entity_tag_dict : defaultdict[str, list[str]]):
     return unique_dict
 
 
+def export_swaps(swapped_list : list, file_name : str):
+    """Exports the swaps performed in one of the swap functions to an iob2 file.
+    Parameters 
+    ----------
+    swapped_list : list
+        The new list containing the new sentences with the swapped entities 
+    file_name : str
+        The name of the exported file   
+    """
+    with open(file_name, "w") as f:
+        for line in swapped_list:
+            if line == "\n":
+                f.write("\n")
+            else:
+                f.write(line + "\n")
 
-### PER SPECIFIC FUNCTIONS
+### PERSON SPECIFIC FUNCTIONS
 
 def count_span_lengths_person_tags(line_list: list):
     """Counts the distribution of PER span lengths (B-PER + subsequent I-PERs).
@@ -253,21 +269,114 @@ def swap_person_entities(line_list: list, person_swaps: dict, shuffled_middle_na
 
 
 
-def export_person_swaps(swapped_list : list, file_name : str):
-    """Exports the swaps performed in the swap_person_entities function to an iob2 file.
-    Parameters 
+
+### SPECIFIC FOR RANDOM STRING GENERATION
+
+
+def length_distribution_names(line_list: list):
+    """Gathers the distribution of names in each category, to be used to generate random strings of similar lengths.
+    Parameters
     ----------
-    swapped_list : list
-        The new list containing the new sentences with the swapped entities 
-    file_name : str
-        The name of the exported file   
+    line_list : list
+        List of lines gathered from the read_file function 
+    Returns
+    -------
+    distribution_dict : defaultdict(lambda: defaultdict(int)) 
+        Dictionary containing the distributions of the different types, split by tag type (PER, ORG, LOC, MISC) (B-I part of tagging is ignored here)
     """
-    with open(file_name, "w") as f:
-        for line in swapped_list:
-            if line == "\n":
-                f.write("\n")
-            else:
-                f.write(line + "\n")
+
+    distribution_dict = defaultdict(lambda: defaultdict(int))
+
+    for line in line_list:
+
+        line = line.split() 
+        if not line:
+            continue
+
+        if line[2] == "B-PER" or line[2] == "I-PER":
+            distribution_dict["PER"][len(line[1])] += 1 
+        elif line[2] == "B-ORG" or line[2] == "I-ORG":
+            distribution_dict["ORG"][len(line[1])] += 1 
+        elif line[2] == "B-LOC" or line[2] == "I-LOC":
+            distribution_dict["LOC"][len(line[1])] += 1 
+        elif line[2] == "B-MISC" or line[2] == "I-MISC":
+            distribution_dict["MISC"][len(line[1])] += 1  
+        else:
+            continue
+
+    return distribution_dict
+
+
+
+
+def random_string_generation_swap(line_list: list, distribution_dict: dict):
+    """Generates random strings based on distributions, and swaps the names of PER, LOC, ORG and MISC entities. 
+    Parameters
+    ----------
+    line_list : list 
+        List of lines gathered from the read_file function 
+    distribution_dict : defaultdict(lambda: defaultdict(int))
+        Dictionary containing the distributions of the different entity types (PER, LOC, ORG, MISC) gathered from the length_distribution_names function.
+    Returns
+    -------
+    swapped_list : list 
+        A list containing each sentence of the entire conll test dataset, with the entity names replaced with random strings. 
+    Notes
+    -----
+    Currently generates strings with all possible ASCII characters, can be changed if needed
+    """
+    swapped_list = []
+
+    per_lengths = list(distribution_dict["PER"].keys())
+    org_lengths = list(distribution_dict["ORG"].keys())
+    loc_lengths = list(distribution_dict["LOC"].keys())
+    misc_lengths = list(distribution_dict["MISC"].keys())
+
+    per_counts = list(distribution_dict["PER"].values())
+    org_counts = list(distribution_dict["ORG"].values())
+    loc_counts= list(distribution_dict["LOC"].values())
+    misc_counts = list(distribution_dict["MISC"].values())
+    for line in line_list:
+
+        line = line.split()
+
+        if not line:
+            swapped_list.append("\n")
+            continue
+
+        if line[2] == "B-PER" or line[2] == "I-PER":
+            word_len = random.choices(per_lengths, weights=per_counts, k=1)[0]
+            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            print(line)         
+            swapped_list.append(" ".join(line))
+
+        elif line[2] == "B-ORG" or line[2] == "I-ORG":
+            word_len = random.choices(org_lengths, weights=org_counts, k=1)[0]
+            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            print(line)         
+            swapped_list.append(" ".join(line))
+
+        elif line[2] == "B-LOC" or line[2] == "I-LOC":
+            word_len = random.choices(loc_lengths, weights=loc_counts, k=1)[0]
+            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            print(line)         
+            swapped_list.append(" ".join(line))
+
+        elif line[2] == "B-MISC" or line[2] == "I-MISC":
+            word_len = random.choices(misc_lengths, weights=misc_counts, k=1)[0]
+            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            print(line)         
+            swapped_list.append(" ".join(line))
+            
+        else:
+            print(line)
+            swapped_list.append(" ".join(line))
+            continue
+    return swapped_list
+
+
+### SPECIFIC FOR TYPOS -- will be implemented later
+
 
 
 if __name__ == "__main__":
@@ -285,4 +394,8 @@ if __name__ == "__main__":
     # print(first_name_list)
     person_swaps, middle_names, last_names = person_swap(entity_dict, first_name_list, last_name_list)
     swapped = swap_person_entities(lines, person_swaps, middle_names, last_names) 
-    export_person_swaps(swapped, "../data/person/test.iob2")
+    export_swaps(swapped, "../data/person/test_person.iob2")
+    dist_dict = length_distribution_names(lines)
+    print(dict(dist_dict["LOC"]))
+    swapped = random_string_generation_swap(lines, dist_dict)
+    export_swaps(swapped, "../data/random/test_random.iob2")
