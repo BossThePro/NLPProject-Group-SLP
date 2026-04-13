@@ -347,29 +347,24 @@ def random_string_generation_swap(line_list: list, distribution_dict: dict):
         if line[2] == "B-PER" or line[2] == "I-PER":
             word_len = random.choices(per_lengths, weights=per_counts, k=1)[0]
             line[1] = "".join(random.choices(string.printable, k=int(word_len)))
-            print(line)         
             swapped_list.append(" ".join(line))
 
         elif line[2] == "B-ORG" or line[2] == "I-ORG":
             word_len = random.choices(org_lengths, weights=org_counts, k=1)[0]
             line[1] = "".join(random.choices(string.printable, k=int(word_len)))
-            print(line)         
             swapped_list.append(" ".join(line))
 
         elif line[2] == "B-LOC" or line[2] == "I-LOC":
             word_len = random.choices(loc_lengths, weights=loc_counts, k=1)[0]
             line[1] = "".join(random.choices(string.printable, k=int(word_len)))
-            print(line)         
             swapped_list.append(" ".join(line))
 
         elif line[2] == "B-MISC" or line[2] == "I-MISC":
             word_len = random.choices(misc_lengths, weights=misc_counts, k=1)[0]
             line[1] = "".join(random.choices(string.printable, k=int(word_len)))
-            print(line)         
             swapped_list.append(" ".join(line))
             
         else:
-            print(line)
             swapped_list.append(" ".join(line))
             continue
     return swapped_list
@@ -396,6 +391,6 @@ if __name__ == "__main__":
     swapped = swap_person_entities(lines, person_swaps, middle_names, last_names) 
     export_swaps(swapped, "../data/person/test_person.iob2")
     dist_dict = length_distribution_names(lines)
-    print(dict(dist_dict["LOC"]))
+    #print(dict(dist_dict["LOC"]))
     swapped = random_string_generation_swap(lines, dist_dict)
     export_swaps(swapped, "../data/random/test_random.iob2")
