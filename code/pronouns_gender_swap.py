@@ -127,6 +127,14 @@ def create_gender_name_dict(data,path="../data/gender_names/top_female_names.csv
 
     name_dict = {}
     df = pd.read_csv(path)
+    name_index = 0
+
+    if path == "../data/gender_names/top_female_names.csv":
+        replacement_pool = df["Female Names"].tolist()
+    else:
+        replacement_pool = df["Male Names"].tolist()
+
+    random.shuffle(replacement_pool)
 
     for instance in data:
 
@@ -135,10 +143,9 @@ def create_gender_name_dict(data,path="../data/gender_names/top_female_names.csv
             if instance[1][i] == "B-PER":
                 first_name = instance[0][i]
 
-                replacement = random.choice(df["Female Names"])
-
                 if first_name not in name_dict.keys():
-                    name_dict[first_name] = replacement
+                    name_dict[first_name] = replacement_pool[name_index]
+                    name_index += 1
                     
     return name_dict
                 
@@ -168,3 +175,16 @@ def gender_name_swap(data,name_dict):
                 instance[0][i] = name_dict[instance[0][i]]
     
     return data
+
+
+if __name__ == "__main__":
+    data = read_iob2_file_wPOS("../data/train_conll.iob2")
+    neutral_pronoun_swapped = total_pronoun_swap(data,gender_neutral_dict)
+    female_pronouns_swapped = total_pronoun_swap(data,female_dominated_dict)
+    male_pronoun_swapped = total_pronoun_swap(data,gender_neutral_dict)
+    #TODO save these back to iob2 files
+    female_names_dict = create_gender_name_dict(data)
+    male_names_dict = create_gender_name_dict(data,path="../data/gender_names/top_male_names.csv")
+    female_names= gender_name_swap(data,female_names_dict)
+    male_names = gender_name_swap(data,male_names_dict)
+    #TODO save these back to iob2 files
