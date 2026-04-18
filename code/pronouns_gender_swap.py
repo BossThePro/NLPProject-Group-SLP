@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+import copy
 
 def read_iob2_file_wPOS(path):
     """
@@ -94,7 +95,7 @@ def total_pronoun_swap(data, transform_dict):
                   instance[0][i] = swap_to
                   change += 1
 
-    print(f"Changed {change} tokens")
+    print(f"Changed {change} PRP and PRP$ tokens")
     return data
 
 
@@ -168,13 +169,17 @@ def gender_name_swap(data,name_dict):
     -----
     """
     
-    for instance in data:
+    swap_data = copy.deepcopy(data)
+
+    for instance in swap_data:
 
         for i in range(len(instance[1])):
             if instance[1][i] == "B-PER":
                 instance[0][i] = name_dict[instance[0][i]]
     
-    return data
+    print(f"Changed {len(name_dict)} first names (B-PER)")
+    
+    return swap_data
 
 def recomplie_data(data,file_path):
     """Turns the swapped_data back into an iob2 file
@@ -193,9 +198,9 @@ def recomplie_data(data,file_path):
 
 
 if __name__ == "__main__":
-    
+
     ### FOR THE PRONOUNS TEST SETS ###
-    data = read_iob2_file_wPOS("../data/train_conll.iob2")
+    data = read_iob2_file_wPOS("../data/test_conll.iob2")
     neutral_pronouns_swapped = total_pronoun_swap(data,gender_neutral_dict)
     female_pronouns_swapped = total_pronoun_swap(data,female_dominated_dict)
     male_pronouns_swapped = total_pronoun_swap(data,male_dominated_dict)
