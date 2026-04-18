@@ -176,15 +176,38 @@ def gender_name_swap(data,name_dict):
     
     return data
 
+def recomplie_data(data,file_path):
+    """Turns the swapped_data back into an iob2 file
+    ----------
+    data : list 
+        The data returned from any of the above swappers, as list of lists
+    
+    file_path : str
+        file path to where you want to save the swapped data
+    """
+    with open (file_path, "w") as F:
+        for line in data:
+            for i in range(len(line[0])):
+                F.write(f"{i+1} {line[0][i]} {line[1][i]} {line[2][i]}\n")
+            F.write("\n")
+
 
 if __name__ == "__main__":
+    
+    ### FOR THE PRONOUNS TEST SETS ###
     data = read_iob2_file_wPOS("../data/train_conll.iob2")
-    neutral_pronoun_swapped = total_pronoun_swap(data,gender_neutral_dict)
+    neutral_pronouns_swapped = total_pronoun_swap(data,gender_neutral_dict)
     female_pronouns_swapped = total_pronoun_swap(data,female_dominated_dict)
-    male_pronoun_swapped = total_pronoun_swap(data,gender_neutral_dict)
-    #TODO save these back to iob2 files
-    female_names_dict = create_gender_name_dict(data)
+    male_pronouns_swapped = total_pronoun_swap(data,male_dominated_dict)
+    recomplie_data(neutral_pronouns_swapped,"../data/pronouns/neutral_pronouns_test.iob2")
+    recomplie_data(female_pronouns_swapped,"../data/pronouns/female_pronouns_test.iob2")
+    recomplie_data(male_pronouns_swapped,"../data/pronouns/male_pronouns_test.iob2")
+
+    ### FOR THE GENDERED NAMES TEST SETS ###
+    female_names_dict = create_gender_name_dict(data,path="../data/gender_names/top_female_names.csv")
     male_names_dict = create_gender_name_dict(data,path="../data/gender_names/top_male_names.csv")
     female_names= gender_name_swap(data,female_names_dict)
     male_names = gender_name_swap(data,male_names_dict)
-    #TODO save these back to iob2 files
+    recomplie_data(female_names,"../data/gender_names/female_names_test.iob2")
+    recomplie_data(male_names,"../data/gender_names/male_names_test.iob2")
+    
