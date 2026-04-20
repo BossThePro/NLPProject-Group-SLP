@@ -1,6 +1,6 @@
 WASHINGTON; WASHINGTON; WASHINGTON
 TIGNES; TIGNES; TIGNES
-Ivory Coast; République de Côte d'Ivoire; Republique de Cote d'Ivoire
+Ivory Coast; Côte d'Ivoire; Cote d'Ivoire
 NAIROBI; NAIROBI; NAIROBI
 ATLANTIC; ATLANTIC; ATLANTIC
 RIO DE JANEIRO; RIO DE JANEIRO; RIO DE JANEIRO
@@ -201,7 +201,7 @@ Soviet Union; Советский Союз; Sovetskiy Soyuz
 Oradea; Oradea; Oradea
 St. Louis; St. Louis; St. Louis
 St Louis; St Louis; St Louis
-Austria; Österreich; Austria
+Austria; Österreich; Osterreich
 United Arab Emirates; الإمارات العربية المتحدة; al-Imarat al-'Arabiyya al-Muttahida
 Pamplona; Pamplona; Pamplona
 K.T. Arasu; K.T. Arasu; K.T. Arasu
@@ -223,7 +223,7 @@ Burundi; Uburundi; Uburundi
 DIYARBAKIR; DIYARBAKIR; DIYARBAKIR
 Oxford; Oxford; Oxford
 DUBLIN; BAILE ÁTHA CLIATH; BAILE ATHA CLIATH
-PAKISTAN; پاکستان; PAKISTANDíli
+PAKISTAN; پاکستان; PAKISTANDILI
 WEST INDIES; WEST INDIES; WEST INDIES
 Melbourne; Melbourne; Melbourne
 Let; Let; Let
@@ -295,7 +295,7 @@ CHONJU; 전주; JEONJU
 Sidi Kreir; سيدي كرير; Sidi Kreir
 Sinaloa; Sinaloa; Sinaloa
 Cape Town; Kaapstad; Kaapstad
-Blida; البليدة; al-bulaydah
+Blida; البليدة; al-Bulaydah
 SOUTH KOREA; 한국; HANGUK
 INDIANAPOLIS; INDIANAPOLIS; INDIANAPOLIS
 Toledo
@@ -344,7 +344,7 @@ Alberta
 Qinglan
 RED SEA
 TORONTO
-N. Ireland
+N. Ireland; T. ÉIREANN; T. EIREANN
 JERUSALEM
 Karlsruhe
 Lebanon
@@ -397,109 +397,109 @@ Ottawa
 Tasmania
 Madrid
 Belfast
-Innisbrook Hilton Resort
-Slovenia
-Pontypridd
-DETROIT
-DODGE CITY
-Santander
-Syria
-BALI
-WALLABY
-London
-Washington
-NEW ENGLAND
-Germany
-Canada
-North West
-SIALKOT
-New Caledonia
-DES MOINES
-Kazanluk
-South Africa
-Pakistan
-Kampala
-Iowa-S
-TIRANA
-Quintana Roo
-AUSTRIA
-Hobart
-Greece
-Panhandle
-Dampier
-Athens
-LONDON
-Buenos Aires
-Frankfurt
-BUFFALO
-Switzerland
-WHISTLER
-LOS ANGELES
-Kanpur
-Wall Street
-Europe
-Bombay
-SAN JOSE
-Lanarkshire
-British Columbia
-Gulf
-N.M.
-New York
-Macedonia
-Italia
-CINCINNATI
-Bellerive Oval
-Dallas-Fort Worth
-Bonn
-Florence
-N.IRELAND
-Oceanic Control Centre
-Iran
-Victoria
-Portugal
-EDMONTON
-France
-WINNIPEG
-Goma
-BUDAPEST
-Tianjin
-Colombia
-Mauritania
-Wales
-Nairobi
-Bangui
-Henry Hub
-Whistler Mountain
-Cairo
-Newfoundland
-HARARE
-Illinois
-Venice
-PORT LOUIS
-BUCHAREST
-Stephenville
-Bratislava
-ZAANDAM
-CAN
-DILI
-Ariz
-New Zealand
-Minneapolis
-HANOVER
-Rangoon
-GLASGOW
-Caribs
-BALKAN
-CONNECTICUT
-Walikale
-Sudan
-TALLAHASSEE
-Egypt
-Brazil
-England
-Malysia
-Italy
+Innisbrook Hilton Resort; Innisbrook Hilton Resort; Innisbrook Hilton Resort
+Slovenia; Slovenija; Slovenija
+Pontypridd; Pontypridd; Pontypridd
+DETROIT; DETROIT; DETROIT
+DODGE CITY; DODGE CITY; DODGE CITY
+Santander; Santander; Santander
+Syria; ٱلْسُوْرِيَّة; al-Sūriyyah
+BALI; ᬩᬮᬶ; BALI
+WALLABY; WALLABY; WALLABY
+London; London; London
+Washington; Washington; Washington
+NEW ENGLAND; NEW ENGLAND; NEW ENGLAND
+Germany; Deutschland; Deutschland
+Canada; Canada; Canada
+North West; North West; North West
+SIALKOT; سیالکوٹ; SIALKOT
+New Caledonia; Nouvelle-Calédonie; Nouvelle-Caledonie
+DES MOINES; DES MOINES; DES MOINES
+Kazanluk; Казанлък; Kazanlak
+South Africa; South Africa; South Africa
+Pakistan; پاكستان; Pakistan
+Kampala; Kampala; Kampala
+Iowa-S; Iowa-S; Iowa-S
+TIRANA; TIRONA; TIRONA
+Quintana Roo; Quintana Roo; Quintana Roo
+AUSTRIA; ÖSTERREICH; OSTERREICH
+Hobart; Hobart; Hobart
+Greece; Ελλάδα; Hellada
+Panhandle; Panhandle; Panhandle
+Dampier; Dampier; Dampier
+Athens; Αθήνα; Athena
+LONDON; LONDON; LONDON
+Buenos Aires; Buenos Aires; Buenos Aires
+Frankfurt; Frankfurt; Frankfurt
+BUFFALO; BUFFALO; BUFFALO
+Switzerland; Schweiz; Schweiz
+WHISTLER; WHISTLER; WHISTLER
+LOS ANGELES; LOS ANGELES; LOS ANGELES
+Kanpur; Kanpur; Kanpur
+Wall Street; Wall Street; Wall Street
+Europe; Europe; Europe
+Bombay; Bombay; Bombay
+SAN JOSE; SAN JOSE; SAN JOSE
+Lanarkshire; Lanarkshire; Lanarkshire
+British Columbia; British Columbia; British Columbia
+Gulf; Golfo; Golfo
+N.M.; N.M.; N.M.
+New York; New York; New York
+Macedonia; Македонија; Makedonija
+Italia; Italia; Italia
+CINCINNATI; CINCINNATI; CINCINNATI
+Bellerive Oval; Bellerive Oval; Bellerive Oval
+Dallas-Fort Worth; Dallas-Fort Worth; Dallas-Fort Worth
+Bonn; Bonn; Bonn
+Florence; Firenze; Firenze
+N.IRELAND; T.ÉIREANN; T.EIREANN
+Oceanic Control Centre; Oceanic Control Centre; Oceanic Control Centre
+Iran; ایران; Iran
+Victoria; Victoria; Victoria
+Portugal; Portugal; Portugal
+EDMONTON; EDMONTON; EDMONTON
+France; France; France
+WINNIPEG; WINNIPEG; WINNIPEG
+Goma; Goma; Goma
+BUDAPEST; BUDAPEST; BUDAPEST
+Tianjin; 天津; Tienchin
+Colombia; Colombia; Colombia
+Mauritania; الموريتانية; al-Mūrītāniyyah
+Wales; Cymru; Cymru
+Nairobi; Nairobi; Nairobi
+Bangui; Bangî; Bangi
+Henry Hub; Henry Hub; Henry Hub
+Whistler Mountain; Whistler Mountain; Whistler Mountain
+Cairo; القاهرة; al-Qāhrẗ
+Newfoundland; Newfoundland; Newfoundland
+HARARE; HARARE; HARARE
+Illinois; Illinois; Illinois
+Venice; Venezia; Venezia
+PORT LOUIS; PORLWI; PORLWI
+BUCHAREST; BUCUREȘTI; BUCURESTI
+Stephenville; Stephenville; Stephenville
+Bratislava; Bratislava; Bratislava
+ZAANDAM; ZAANDAM; ZAANDAM
+CAN; CAN; CAN
+DILI; DÍLI; DILI 
+Ariz; Ariz; Ariz
+New Zealand; New Zealand; New Zealand
+Minneapolis; Minneapolis; Minneapolis
+HANOVER; HANNOBER; HANNOBER
+Rangoon; မဟာရန်ကုန်; Rangoon
+GLASGOW; GLESGA; GLESGA
+Caribs; Karìna; Kalina
+BALKAN; BALKAN; BALKAN
+CONNECTICUT; CONNECTICUT; CONNECTICUT
+Walikale; Walikale; Walikale
+Sudan; السودان; Sudan
+TALLAHASSEE; TALLAHASSEE; TALLAHASSEE
+Egypt; مصر; Misr
+Brazil; Brasil; Brasil
+England; England; England
+Malaysia; مليسيا; Malaysia
+Italy; Italia; Italia
 LA LAKERS; LOS ANGELES LAKERS; LOS ANGELES LAKERS
-ANKARA
-Guangxi
-Texas
+ANKARA; ANKARA; ANKARA
+Guangxi; 广西; Kwangsi
+Texas; Texas; Texas
