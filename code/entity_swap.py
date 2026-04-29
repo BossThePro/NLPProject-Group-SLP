@@ -68,8 +68,6 @@ def process_line(line_list : list, ignore_bio: bool=False):
     return entity_tag_dict 
 
 
-### TODO: add pronoun finding, here we can make use of the Part-of-Speech personal pronoun tag PRP, and possibly the possesive pronoun PRP$
-
 def entity_count(entity_tag_dict : defaultdict[str, list[str]]):
     """Counts the amount of entities of different (relevant) tags. Also counts the amount of unique entities of different (relevant) tags.
     Parameters
@@ -369,28 +367,207 @@ def random_string_generation_swap(line_list: list, distribution_dict: dict):
             continue
     return swapped_list
 
+### SPECIFIC FOR EXONYMS VS ENDONYMS
+def loc_grabber(line_list: list, file_name: str):
+    """Grabs the B-LOC and I-LOC names and puts them into a file of their own for annotations.
+    Parameters
+    ----------
+    line_list : list 
+        List of lines gathered from the read_file function 
+    file_name : str 
+        Path of the file to be exported
+    """
+    lines = set() 
+    i = 0
+    split_lines = [line.split() for line in line_list]
 
-### SPECIFIC FOR TYPOS -- will be implemented later
+    while i < len(split_lines):
+        line = split_lines[i]
+        if not line:
+            i += 1
+            continue
+        if line[2] == "B-LOC":
+            full_name = [line[1]]
+            j = i + 1
+            while j < len(split_lines) and split_lines[j] and split_lines[j][2] == "I-LOC":
+                full_name.append(split_lines[j][1])
+                j += 1
+            lines.add(" ".join(full_name))
+            i = j
+        else:
+            i += 1
+    with open(file_name, "w") as f:
+        for line in lines:
+                f.write("".join(line) + "\n")
 
 
+def group_sentences(line_list):
+    """Groups sentences as lists of token rows [position, word, ner_tag, pos_tag] for use in replace_locs_in_sentence to find spans.
+    Parameters
+    ----------
+    line_list : list 
+        List of lines gathered from the read_file function
+    Returns
+    -------
+    sentences : list 
+        List of sentences containing each word in list format: [position, word, ner_tag, pos_tag]
+    """
+    sentences = []
+    sentence = []
+    for line in line_list:
+        parts = line.split()
+        if not parts:
+            if sentence:
+                sentences.append(sentence)
+            sentence = []
+        else:
+            sentence.append(parts)
+    if sentence:
+        sentences.append(sentence)
+    return sentences
+
+
+def build_lookup(file_name: str):
+    """ Reads the file containing (exonym, endonym, latinization) and creates a lookup dictionary for use in replace_locs_in_sentence function
+    Parameters
+    ----------
+    file_name : str 
+        Path of the file containing the exonyms, endonyms and latinizations of the locations
+    Returns
+    -------
+    lookup : dict 
+        Dictionary consisting of key: exonym and value: (endonym, latinization) for use in replace_locs_in_sentence function 
+    """
+    lookup = {}
+    with open(file_name, "r", encoding="utf-8") as f:
+        for line in f:
+            parts = line.strip().split("; ")
+            lookup[parts[0].lower()] = (parts[1], parts[2])
+    return lookup
+
+
+def replace_locs_in_sentence(sentence: list, lookup: dict):
+    """ Replaces LOC spans using the lookup table gathered from the build_lookup function, and rebuilds the correct sentence structure in terms of position (number) etc.
+    Parameters
+    ----------
+    sentence : list 
+        Sentence gathered from the group_sentences function
+    lookup : dict 
+        Dictionary consisting of key (original value) and value (endonym, latinization) 
+
+    Returns
+    -------
+    out_orig : list 
+        The original (endonym) version of the sentence 
+    out_latin : list 
+        The latinized version of the sentence
+    """
+    i = 0
+    out_orig, out_latin = [], []
+
+    while i < len(sentence):
+        if sentence[i][2] == "B-LOC":
+            span = [sentence[i]]
+            j = i + 1
+            while j < len(sentence) and sentence[j][2] == "I-LOC":
+                span.append(sentence[j])
+                j += 1
+
+            entity = " ".join(tok[1] for tok in span)
+            if entity.lower() not in lookup:
+                print(f"Missing entity: '{entity}'")
+                continue
+            endo, latin = lookup[entity.lower()]
+
+            for k, token in enumerate(endo.split()):
+                out_orig.append(["_", token, "B-LOC" if k == 0 else "I-LOC", "_"])
+            for k, token in enumerate(latin.split()):
+                out_latin.append(["_", token, "B-LOC" if k == 0 else "I-LOC", "_"])
+
+            i = j
+        else:
+            out_orig.append(sentence[i])
+            out_latin.append(sentence[i])
+            i += 1
+
+    for k, tok in enumerate(out_orig):
+        tok[0] = str(k + 1)
+    for k, tok in enumerate(out_latin):
+        tok[0] = str(k + 1)
+
+    return out_orig, out_latin
+
+
+def loc_replacer(line_list: list, file_name: str):
+    """Helper function that swaps locations for the exonym & endonym part of our research question 
+    Parameters
+    ----------
+    line_list : list 
+        List of lines gathered from the read_file function 
+    file_name : str
+        Name of file containing the original, endonym and latinization of endonym for each location.
+
+    Returns
+    -------
+    swapped_list_endonym : list 
+        List of sentences with the locations swapped with the endonyms of those locations
+    swapped_list_latin : list 
+        List of sentences with the locations swapped with the latinization of those locations
+    """
+    lookup = build_lookup(file_name)
+    swapped_list_endonym = []
+    swapped_list_latin = []
+
+    for sentence in group_sentences(line_list):
+        endonym, latin = replace_locs_in_sentence(sentence, lookup)
+        swapped_list_endonym.append(endonym)
+        swapped_list_latin.append(latin)
+
+    return swapped_list_endonym, swapped_list_latin
+
+
+def sentences_to_lines(sentences: list):
+    """Converts the sentences gathered from the loc_replacer helper function into clean list format, to work correctly with the export_swaps function 
+    Parameters
+    ----------
+    sentences : list
+        List of sentences gathered from loc_replacer / replace_locs_in_sentence function
+
+    Returns
+    ------
+    lines : list
+        List of lines compatible with the export_swaps function
+    """
+    lines = []
+    for sentence in sentences:
+        for tok in sentence:
+            lines.append(" ".join(tok))
+        lines.append("\n")
+    return lines
 
 if __name__ == "__main__":
     print("Hello World!")
     conll_file_path = "../data/test_conll.iob2"
     lines = read_file(conll_file_path)
-    entity_dict = process_line(lines, ignore_bio=False)
-    unique_counts = entity_count(entity_dict)
-    total_counts_span = count_span_lengths_person_tags(lines)
-    print(total_counts_span)
-    file_path_first_names = "../data/person/arabic_first_names.csv"
-    file_path_last_names = "../data/person/arabic_last_names.csv"
-    first_name_list = name_reader(file_path_first_names)
-    last_name_list = name_reader(file_path_last_names)
-    # print(first_name_list)
-    person_swaps, middle_names, last_names = person_swap(entity_dict, first_name_list, last_name_list)
-    swapped = swap_person_entities(lines, person_swaps, middle_names, last_names) 
-    export_swaps(swapped, "../data/person/test_person.iob2")
-    dist_dict = length_distribution_names(lines)
-    #print(dict(dist_dict["LOC"]))
-    swapped = random_string_generation_swap(lines, dist_dict)
-    export_swaps(swapped, "../data/random/test_random.iob2")
+    # swapped_list_endonym, swapped_list_latin = loc_replacer(lines, "../data/location_exonym_endonym/locations.iob2") 
+    # swapped_list_endonym = sentences_to_lines(swapped_list_endonym)
+    # swapped_list_latin = sentences_to_lines(swapped_list_latin)
+    # export_swaps(swapped_list_endonym, "../data/location_exonym_endonym/location_endonym.iob2")
+    # export_swaps(swapped_list_latin, "../data/location_exonym_endonym/location_latin.iob2")
+    # entity_dict = process_line(lines, ignore_bio=False)
+    # unique_counts = entity_count(entity_dict)
+    # total_counts_span = count_span_lengths_person_tags(lines)
+    # print(total_counts_span)
+    # file_path_first_names = "../data/person/arabic_first_names.csv"
+    # file_path_last_names = "../data/person/arabic_last_names.csv"
+    # first_name_list = name_reader(file_path_first_names)
+    # last_name_list = name_reader(file_path_last_names)
+    # # print(first_name_list)
+    # person_swaps, middle_names, last_names = person_swap(entity_dict, first_name_list, last_name_list)
+    # swapped = swap_person_entities(lines, person_swaps, middle_names, last_names) 
+    # export_swaps(swapped, "../data/person/test_person.iob2")
+    # dist_dict = length_distribution_names(lines)
+    # #print(dict(dist_dict["LOC"]))
+    # swapped = random_string_generation_swap(lines, dist_dict)
+    # export_swaps(swapped, "../data/random/test_random.iob2")
+    #loc_grabber(lines, "../data/location_exonym_endonym/locations.iob2")
