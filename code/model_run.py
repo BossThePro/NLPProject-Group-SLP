@@ -32,6 +32,11 @@ def read_iob2_file(path):
 
 
 #TODO Change the code such that sub-tokens divided by the model are also accounted for, by using indexing
+# Currently the problem is a lot of the tokens are splitted into subtokens for ex. JAPAN might appear as 
+# J B-LOC, ##AP I-LOC ##AN I-LOC now do we still count this as a correct prediction, currently the code does not
+# do that, it'll completely disregard this and only count a predicion when the exact string JAPAN is matched in 
+# the results, the other solution is to tell the transformer to not have subtokens but then it groups token which 
+# may not exist like Asian Cup are 2 different tokens but it'll group them as one and tag it MISC without a B or I
 
 def run_model(iob2file,model):
     """Runs a given model (imported from hugging face) on a given iob2 file
@@ -81,3 +86,12 @@ def recomplie_data(data,file_path):
             for i in range(len(line[0])):
                 F.write(f"{i+1} {line[0][i]} {line[1][i]} {line[2][i]}\n")
             F.write("\n")
+
+folders_run = {"gender_names" : ["female_names_test.iob2","male_names_test.iob2"],
+               "location_exonym_endonym" : ["location_endonym.iob2","location_latin.iob2"],
+               "person":["GOD KNOWS WHAT TO DO HERE"],
+               "pronouns":["female_pronouns_test.iob2","male_pronouns_test.iob2","neutral_pronouns_test.iob2"],
+               "random" : ["test_random.iob2"]}
+
+if __name__ == "JOE":
+    pass
