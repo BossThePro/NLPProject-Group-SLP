@@ -55,7 +55,7 @@ def run_model(iob2file,model):
     data = read_iob2_file(iob2file)
 
     #combining all the sentences together to ensure one call to transformer
-    combined_data = [" ".join(sentence[0] for sentence in data)]
+    combined_data = [" ".join(sentence[0]) for sentence in data]
 
     #running the model on the combined data
     all_results = model(combined_data, batch_size = 16)
@@ -76,7 +76,7 @@ def run_model(iob2file,model):
                 pred[word_idx[j["word"]]] = j["entity"]
         
         #append everything to new data
-        new_data.append(tokens,actual,pred)
+        new_data.append((tokens,actual,pred))
     
     return new_data
 
