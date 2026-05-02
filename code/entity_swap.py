@@ -545,10 +545,32 @@ def sentences_to_lines(sentences: list):
         lines.append("\n")
     return lines
 
-if __name__ == "__main__":
-    print("Hello World!")
+def test_set_creator(region: str):
+    """Helper function to create test sets for the person names 
+    Parameters 
+    ----------
+    region : str 
+    The name of the region / country, possibilities are: "African", "American", "Arabic", "European" or "Indian"
+
+    """
     conll_file_path = "../data/test_conll.iob2"
     lines = read_file(conll_file_path)
+    entity_dict = process_line(lines, ignore_bio=False)
+    file_path_first_names = f"../data/person/{region.lower()}/{region.lower()}_first_names.csv"
+    file_path_last_names = f"../data/person/{region.lower()}/{region.lower()}_last_names.csv"
+    first_name_list = name_reader(file_path_first_names)
+    last_name_list = name_reader(file_path_last_names)
+    for i in range(10):
+        person_swaps, middle_names, last_names = person_swap(entity_dict, first_name_list, last_name_list)
+        swapped = swap_person_entities(lines, person_swaps, middle_names, last_names)
+        os.makedirs(f"../data/person/{region.lower()}/testSets", exist_ok=True)
+        export_swaps(swapped, f"../data/person/{region.lower()}/testSets/{region.lower()}_conll_{i+1}")
+        print(f"Finished dataset {i+1} out of 10: Region = {region}")
+if __name__ == "__main__":
+    print("Hello World!")
+    test_set_creator("indian")
+    # conll_file_path = "../data/test_conll.iob2"
+    # lines = read_file(conll_file_path)
     # swapped_list_endonym, swapped_list_latin = loc_replacer(lines, "../data/location_exonym_endonym/locations.iob2") 
     # swapped_list_endonym = sentences_to_lines(swapped_list_endonym)
     # swapped_list_latin = sentences_to_lines(swapped_list_latin)
