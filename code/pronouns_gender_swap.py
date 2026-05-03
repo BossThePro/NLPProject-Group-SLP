@@ -201,18 +201,21 @@ if __name__ == "__main__":
 
     ### FOR THE PRONOUNS TEST SETS ###
     data = read_iob2_file_wPOS("../data/test_conll.iob2")
-    neutral_pronouns_swapped = total_pronoun_swap(data,gender_neutral_dict)
+    ''' neutral_pronouns_swapped = total_pronoun_swap(data,gender_neutral_dict)
     female_pronouns_swapped = total_pronoun_swap(data,female_dominated_dict)
     male_pronouns_swapped = total_pronoun_swap(data,male_dominated_dict)
     recomplie_data(neutral_pronouns_swapped,"../data/pronouns/neutral_pronouns_test.iob2")
     recomplie_data(female_pronouns_swapped,"../data/pronouns/female_pronouns_test.iob2")
-    recomplie_data(male_pronouns_swapped,"../data/pronouns/male_pronouns_test.iob2")
+    recomplie_data(male_pronouns_swapped,"../data/pronouns/male_pronouns_test.iob2")'''
+
+
 
     ### FOR THE GENDERED NAMES TEST SETS ###
-    female_names_dict = create_gender_name_dict(data,path="../data/gender_names/top_female_names.csv")
-    male_names_dict = create_gender_name_dict(data,path="../data/gender_names/top_male_names.csv")
-    female_names= gender_name_swap(data,female_names_dict)
-    male_names = gender_name_swap(data,male_names_dict)
-    recomplie_data(female_names,"../data/gender_names/female_names_test.iob2")
-    recomplie_data(male_names,"../data/gender_names/male_names_test.iob2")
+    for i in range(10):
+        female_names_dict = create_gender_name_dict(data,path=f"../data/gender_names/top_female_names.csv")
+        male_names_dict = create_gender_name_dict(data,path="../data/gender_names/top_male_names.csv")
+        female_names= gender_name_swap(data,female_names_dict)
+        male_names = gender_name_swap(data,male_names_dict)
+        recomplie_data(female_names,f"../TestSets/gender_names/female_names_test_{i}.iob2")
+        recomplie_data(male_names,f"../TestSets/gender_names/male_names_test_{i}.iob2")
     
