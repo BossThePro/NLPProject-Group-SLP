@@ -564,7 +564,7 @@ def test_set_creator(region: str):
         person_swaps, middle_names, last_names = person_swap(entity_dict, first_name_list, last_name_list)
         swapped = swap_person_entities(lines, person_swaps, middle_names, last_names)
         os.makedirs(f"../data/person/{region.lower()}/testSets", exist_ok=True)
-        export_swaps(swapped, f"../data/person/{region.lower()}/testSets/{region.lower()}_conll_{i+1}")
+        export_swaps(swapped, f"../data/person/{region.lower()}/testSets/{region.lower()}_conll_{i+1}.iob2")
         print(f"Finished dataset {i+1} out of 10: Region = {region}")
 if __name__ == "__main__":
     print("Hello World!")
