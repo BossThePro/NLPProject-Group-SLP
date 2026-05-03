@@ -110,7 +110,7 @@ def recomplie_data(run_output,file_name):
                 f.write(line + "\n")
 
 
-if __name__ == "main":
+if __name__ == "__main__":
     total = 0
     for folder in categories:
 
@@ -120,14 +120,16 @@ if __name__ == "main":
             output_mono, final_name_mono = run_model(os.path.join(test_dir,folder,file),tokenizer_mono,model_mono)
             mono_dir = os.path.join(target_dir, folder, "mono")
             os.makedirs(mono_dir,exist_ok=True)
-            final_loc_mono = os.path.join(mono_dir, final_name_mono + "_results_mono.iob2")
+            print(final_name_mono)
+            file_name = file[:-5]
+            final_loc_mono = os.path.join(mono_dir, file_name + "_results_mono.iob2")
             recomplie_data(output_mono, final_loc_mono)
             print(f"Finished mono model. File saved to: {final_loc_mono}")
 
             output_multi, final_name_multi = run_model(os.path.join(test_dir,folder,file),tokenizer_multi,model_multi)
             multi_dir = os.path.join(target_dir, folder, "multi")
             os.makedirs(multi_dir,exist_ok=True)
-            final_loc_multi = os.path.join(multi_dir, final_name_multi + "_results_multi.iob2")
+            final_loc_multi = os.path.join(multi_dir, file_name + "_results_multi.iob2")
             recomplie_data(output_multi, final_loc_multi)
             print(f"Finished multi model. File saved to: {final_loc_multi}")
 

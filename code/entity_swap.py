@@ -344,22 +344,22 @@ def random_string_generation_swap(line_list: list, distribution_dict: dict):
 
         if line[2] == "B-PER" or line[2] == "I-PER":
             word_len = random.choices(per_lengths, weights=per_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
             swapped_list.append(" ".join(line))
 
         elif line[2] == "B-ORG" or line[2] == "I-ORG":
             word_len = random.choices(org_lengths, weights=org_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
             swapped_list.append(" ".join(line))
 
         elif line[2] == "B-LOC" or line[2] == "I-LOC":
             word_len = random.choices(loc_lengths, weights=loc_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
             swapped_list.append(" ".join(line))
 
         elif line[2] == "B-MISC" or line[2] == "I-MISC":
             word_len = random.choices(misc_lengths, weights=misc_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.printable, k=int(word_len)))
+            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
             swapped_list.append(" ".join(line))
             
         else:
@@ -568,9 +568,9 @@ def test_set_creator(region: str):
         print(f"Finished dataset {i+1} out of 10: Region = {region}")
 if __name__ == "__main__":
     print("Hello World!")
-    test_set_creator("indian")
-    # conll_file_path = "../data/test_conll.iob2"
-    # lines = read_file(conll_file_path)
+    # test_set_creator("indian")
+    #conll_file_path = "../data/test_conll.iob2"
+    #lines = read_file(conll_file_path)
     # swapped_list_endonym, swapped_list_latin = loc_replacer(lines, "../data/location_exonym_endonym/locations.iob2") 
     # swapped_list_endonym = sentences_to_lines(swapped_list_endonym)
     # swapped_list_latin = sentences_to_lines(swapped_list_latin)
@@ -588,8 +588,8 @@ if __name__ == "__main__":
     # person_swaps, middle_names, last_names = person_swap(entity_dict, first_name_list, last_name_list)
     # swapped = swap_person_entities(lines, person_swaps, middle_names, last_names) 
     # export_swaps(swapped, "../data/person/test_person.iob2")
-    # dist_dict = length_distribution_names(lines)
+    #dist_dict = length_distribution_names(lines)
     # #print(dict(dist_dict["LOC"]))
-    # swapped = random_string_generation_swap(lines, dist_dict)
-    # export_swaps(swapped, "../data/random/test_random.iob2")
+    #swapped = random_string_generation_swap(lines, dist_dict)
+    #export_swaps(swapped, "../TestSets/random/random_conll.iob2")
     #loc_grabber(lines, "../data/location_exonym_endonym/locations.iob2")
