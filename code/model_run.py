@@ -1,3 +1,6 @@
+import torch
+from transformers import AutoTokenizer, AutoModelForTokenClassification
+
 def read_iob2_file(path):
     """
     Read provided Universal NER iob2 file
@@ -31,61 +34,69 @@ def read_iob2_file(path):
     return data
 
 
-#TODO Change the code such that sub-tokens divided by the model are also accounted for, by using indexing
-# Currently the problem is a lot of the tokens are splitted into subtokens for ex. JAPAN might appear as 
-# J B-LOC, ##AP I-LOC ##AN I-LOC now do we still count this as a correct prediction, currently the code does not
-# do that, it'll completely disregard this and only count a predicion when the exact string JAPAN is matched in 
-# the results, the other solution is to tell the transformer to not have subtokens but then it groups token which 
-# may not exist like Asian Cup are 2 different tokens but it'll group them as one and tag it MISC without a B or I
+def run_model_malik(file_path,tokenizer,model):
 
-def run_model(iob2file,model):
-    """Runs a given model (imported from hugging face) on a given iob2 file
-    ----------
-    iob2file : string
-        path to an iob2file with tokens and NER tags in the first 2 columns
+    data = read_iob2_file(file_path)
     
-    model : transformers.pipelines.token_classification.TokenClassificationPipeline
-        the model pipeline to be tested, should include tokeniser and model
+    ### Changes the device to the GPU if it exists, otherwise stays on the CPU
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    ### Moves the predictions to the correct device (see above for clarification)
+    model = model.to(device)
+    ### list to store final output from all sentences
+    final_output = []
 
-    Returns
-    -------
-    data : list 
-        A list of tuples where each tuple is ([tokens], [ground_truth], [predictions])
-    """
-    data = read_iob2_file(iob2file)
+    file_name = file_path[0:-5] + "_results" + ".iob2"
+    
+    for i in range(len(data)):
+        ### Splitting tokens and ner tags, since both are included when inputting
+        tokens, ner_tags = data[i]
+        ### Creating a string sentence instead of list for computation
+        sentence = " ".join(tokens)
 
-    #combining all the sentences together to ensure one call to transformer
-    combined_data = [" ".join(sentence[0]) for sentence in data]
+        ### Applies the tokenizer to the input, with pytorch tensor format instead of general list format. 
+        inputs = tokenizer(sentence, return_tensors="pt")
 
-    #running the model on the combined data
-    all_results = model(combined_data, batch_size = 16)
-
-    #A place to save the predictions and the old data
-    new_data = []
-
-    #Iterating over the original data and the results we got for each sentence
-    for (tokens,actual), results in zip(data,all_results):
-        pred = ['O'] * len(tokens)
-
-        #getting indexes for each token for faster processing
-        word_idx = {word : i for i,word in enumerate(tokens)}
-
-        #check the results for the current sentence if matching token found, add its prediction using idx
-        for j in results:
-            if j["word"] in tokens:
-                pred[word_idx[j["word"]]] = j["entity"]
+        ### Converts the actual integer id's, mask and token types to the correct device defined outside of the loop.
+        input_ids = inputs["input_ids"].to(device)
+        attention_mask = inputs["attention_mask"].to(device)
+        token_type_ids = inputs["token_type_ids"].to(device)
         
-        #append everything to new data
-        new_data.append((tokens,actual,pred))
-    
-    return new_data
+        ## Gets the outputs from the actual BERT model
+        outputs = model(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
 
-def recomplie_data(data,file_path):
-    with open (file_path, "w") as F:
-        for line in data:
-            for i in range(len(line[0])):
-                F.write(f"{i+1} {line[0][i]} {line[1][i]} {line[2][i]}\n")
-            F.write("\n")
+        ### Picks the most probable NER tag
+        predictions = torch.argmax(outputs.logits, dim=2)
+
+        ### Converts the actual integer ids back into human readaable words, e.g. (SOCCER JAPAN ....)
+        pred_tokens = tokenizer.convert_ids_to_tokens(inputs["input_ids"][0])
+
+        ### Merges the subword tokens given by "##SUBWORD"
+        merged = []
+        for token, pred in zip(pred_tokens, predictions[0]):
+            label = model.config.id2label[pred.item()]
+            if token.startswith("##"):
+                merged[-1]['word'] += token[2:]
+            else:
+                merged.append({'word': token, 'entity': label})
+    
+        ### Remove [CLS] and [SEP] tags, which are created by the BERT model for separation and classification (classification does not really apply to NER tasks)
+        merged = [t for t in merged if t['word'] not in ['[CLS]', '[SEP]']]
+
+        ### Makes a list with the format: original word, ground truth NER tag, predicted NER tag
+        for gt_word, gt_tag, pred in zip(tokens, ner_tags, merged):
+            final_output.append(f"{gt_word} {gt_tag} {pred["entity"]}")
+        final_output.append("\n")
+
+    return final_output, file_name
+
+def recomplie_data(run_output,file_name):
+    ### Outputs to a file with the format: original word, ground truth NER tag, predicted NER tag 
+    with open(file_name, "w") as f:
+        for line in run_output:
+            if line == "\n":
+                f.write("\n")
+            else:
+                f.write(line + "\n")
 
 folders_run = {"gender_names" : ["female_names_test.iob2","male_names_test.iob2"],
                "location_exonym_endonym" : ["location_endonym.iob2","location_latin.iob2"],
