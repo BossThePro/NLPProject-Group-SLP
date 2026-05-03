@@ -1,5 +1,16 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForTokenClassification
+import os
+
+tokenizer_mono = AutoTokenizer.from_pretrained("dslim/bert-large-NER")
+model_mono = AutoModelForTokenClassification.from_pretrained("dslim/bert-large-NER")
+
+tokenizer_multi = AutoTokenizer.from_pretrained("Davlan/bert-base-multilingual-cased-ner-hrl")
+model_multi = AutoModelForTokenClassification.from_pretrained("Davlan/bert-base-multilingual-cased-ner-hrl")
+
+test_dir = "../TestSets"
+target_dir = "../predictions"
+categories = ["gender_names","location_exonym_endonym","original_test","person","pronouns","random"]
 
 def read_iob2_file(path):
     """
@@ -34,7 +45,7 @@ def read_iob2_file(path):
     return data
 
 
-def run_model_malik(file_path,tokenizer,model):
+def run_model(file_path,tokenizer,model):
 
     data = read_iob2_file(file_path)
     
@@ -45,7 +56,7 @@ def run_model_malik(file_path,tokenizer,model):
     ### list to store final output from all sentences
     final_output = []
 
-    file_name = file_path[0:-5] + "_results" + ".iob2"
+    file_name = file_path[0:-5]
     
     for i in range(len(data)):
         ### Splitting tokens and ner tags, since both are included when inputting
@@ -98,11 +109,28 @@ def recomplie_data(run_output,file_name):
             else:
                 f.write(line + "\n")
 
-folders_run = {"gender_names" : ["female_names_test.iob2","male_names_test.iob2"],
-               "location_exonym_endonym" : ["location_endonym.iob2","location_latin.iob2"],
-               "person":["GOD KNOWS WHAT TO DO HERE"],
-               "pronouns":["female_pronouns_test.iob2","male_pronouns_test.iob2","neutral_pronouns_test.iob2"],
-               "random" : ["test_random.iob2"]}
 
-if __name__ == "JOE":
-    pass
+if __name__ == "main":
+    total = 0
+    for folder in categories:
+
+        files = os.listdir(os.path.join(test_dir,folder))
+
+        for file in files:
+            output_mono, final_name_mono = run_model(os.path.join(test_dir,folder,file),tokenizer_mono,model_mono)
+            mono_dir = os.path.join(target_dir, folder, "mono")
+            os.makedirs(mono_dir,exist_ok=True)
+            final_loc_mono = os.path.join(mono_dir, final_name_mono + "_results_mono.iob2")
+            recomplie_data(output_mono, final_loc_mono)
+            print(f"Finished mono model. File saved to: {final_loc_mono}")
+
+            output_multi, final_name_multi = run_model(os.path.join(test_dir,folder,file),tokenizer_multi,model_multi)
+            multi_dir = os.path.join(target_dir, folder, "multi")
+            os.makedirs(multi_dir,exist_ok=True)
+            final_loc_multi = os.path.join(multi_dir, final_name_multi + "_results_multi.iob2")
+            recomplie_data(output_multi, final_loc_multi)
+            print(f"Finished multi model. File saved to: {final_loc_multi}")
+
+            total +=1
+            print(f"Finished dataset {total}")
+            
