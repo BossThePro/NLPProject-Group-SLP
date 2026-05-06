@@ -10,8 +10,8 @@ model_multi = AutoModelForTokenClassification.from_pretrained("Davlan/bert-base-
 
 test_dir = "../TestSets"
 target_dir = "../predictions"
-categories = ["pronouns"]
-# "location_exonym_endonym","original_test","person", "gender_names", "random"
+categories = ["typos"]
+# "location_exonym_endonym","original_test","person","pronouns","gender_names", "random"
 def read_iob2_file(path):
     """
     Read provided Universal NER iob2 file
@@ -117,6 +117,7 @@ if __name__ == "__main__":
         files = os.listdir(os.path.join(test_dir,folder))
 
         for file in files:
+            print(f"Working on data {total+1}")
             output_mono, final_name_mono = run_model(os.path.join(test_dir,folder,file),tokenizer_mono,model_mono)
             mono_dir = os.path.join(target_dir, folder, "mono")
             os.makedirs(mono_dir,exist_ok=True)
