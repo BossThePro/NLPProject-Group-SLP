@@ -604,7 +604,7 @@ comeback O O
 . O O
 
 " O O
-he O O
+He O O
 ended O O
 the O O
 World B-MISC O
@@ -2118,7 +2118,7 @@ in O O
 London B-LOC B-LOC
 . O O
 
-he O O
+He O O
 was O O
 fined O O
 and O O
@@ -3644,7 +3644,7 @@ lasting O O
 minutes O O
 . O O
 
-his O O
+His O O
 crucial O O
 fifth-wicket O O
 partnership O O
@@ -3705,7 +3705,7 @@ on O O
 Tuesday O O
 . O O
 
-he O O
+He O O
 ( O O
 Lara B-PER B-PER
 ) O O
@@ -3794,7 +3794,7 @@ his O O
 innings O O
 after O O
 hurting O O
-themself O O
+himself O O
 as O O
 he O O
 scurried O O
@@ -6863,7 +6863,7 @@ Arizona B-ORG I-ORG
 State I-ORG O
 . O B-ORG
 
-he O O
+He O O
 was O O
 the O O
 most O O
@@ -9157,7 +9157,7 @@ I O O
 confident O O
 that O O
 Costa B-PER O
-themself O B-PER
+himself O B-PER
 will O O
 be O O
 there O O
@@ -9230,7 +9230,7 @@ racist O O
 taunts O O
 . O O
 
-he O O
+He O O
 has O O
 offered O O
 to O O
@@ -10290,7 +10290,7 @@ circuit O O
 . O O
 " O O
 
-he O O
+He O O
 's O O
 a O O
 remarkably O O
@@ -10570,7 +10570,7 @@ hot O O
 spots O O
 . O O
 
-he O O
+He O O
 said O O
 the O O
 recent O O
@@ -10758,7 +10758,7 @@ State O O
 
 I O O
 wish O O
-his O O
+him O O
 well O O
 , O O
 " O O
@@ -10847,7 +10847,7 @@ in O O
 , O O
 fled O O
 with O O
-his O O
+him O O
 family O O
 to O O
 the O O
@@ -11028,7 +11028,7 @@ but O O
 warned O O
 against O O
 expecting O O
-his O O
+him O O
 to O O
 exert O O
 any O O
@@ -11266,7 +11266,7 @@ told O O
 Reuters B-ORG O
 . O O
 
-he O O
+He O O
 said O O
 after O O
 June O O
@@ -11789,7 +11789,7 @@ coal O O
 exports O O
 . O O
 
-he O O
+He O O
 said O O
 , O O
 however O O
@@ -12186,7 +12186,7 @@ around O O
 litres O O
 . O O
 
-he O O
+He O O
 said O O
 the O O
 65-80-litre O O
@@ -12366,7 +12366,7 @@ firm O O
 margins O O
 . O O
 
-he O O
+He O O
 said O O
 advertising O O
 costs O O
@@ -12555,7 +12555,7 @@ short-term O O
 one O O
 . O O
 
-he O O
+He O O
 said O O
 his O O
 firm O O
@@ -12713,7 +12713,7 @@ on O O
 Friday O O
 . O O
 
-he O O
+He O O
 said O O
 that O O
 the O O
@@ -12857,7 +12857,7 @@ six O O
 weeks O O
 . O O
 
-his O O
+His O O
 spokesman O O
 said O O
 on O O
@@ -13223,7 +13223,7 @@ police O O
 said O O
 . O O
 
-he O O
+He O O
 will O O
 appear O O
 in O O
@@ -13232,7 +13232,7 @@ on O O
 Saturday O O
 . O O
 
-his O O
+Him O O
 name O O
 was O O
 not O O
@@ -13451,7 +13451,7 @@ he O O
 said O B-LOC
 . O I-LOC
 
-his O O
+His O O
 comments O O
 came O O
 just O O
@@ -14154,7 +14154,7 @@ and O O
 hospital O O
 officials O O
 described O O
-his O O
+him O O
 condition O O
 as O O
 serious O O
@@ -14390,7 +14390,7 @@ parliament O O
 . O O
 
 " O O
-he O O
+He O O
 ( O O
 Gorst B-PER B-PER
 ) O O
@@ -14440,7 +14440,7 @@ MP O O
 would O O
 not O O
 feel O O
-themself O O
+himself O O
 obliged O O
 to O O
 vote O O
@@ -14449,7 +14449,7 @@ the O O
 government O O
 . O O
 
-he O O
+He O O
 said O O
 at O O
 one O O
@@ -15777,7 +15777,7 @@ its O O
 offer O O
 . O O
 
-he O O
+He O O
 said O O
 the O O
 Santa B-ORG B-LOC
@@ -17068,7 +17068,7 @@ general O O
 added O O
 . O O
 
-he O O
+He O O
 denied O O
 that O O
 his O O
@@ -18098,7 +18098,7 @@ the O O
 summit O O
 . O O
 
-his O O
+His O O
 spokesman O O
 had O O
 predicted O O
@@ -18511,7 +18511,7 @@ the O O
 spokesman O O
 added O O
 
-he O O
+He O O
 was O O
 unable O O
 to O O
@@ -18590,7 +18590,7 @@ who O O
 threatened O O
 to O O
 blow O O
-themself O O
+himself O O
 up O O
 outside O O
 President O O
@@ -18620,7 +18620,7 @@ said O O
 he O O
 would O O
 blow O O
-themself O O
+himself O O
 up O O
 outside O O
 the O O
@@ -19226,7 +19226,7 @@ liquidation O O
 . O O
 
 " O O
-he O O
+He O O
 could O O
 freeze O O
 metal O O
@@ -19456,7 +19456,7 @@ Chernyshev B-PER O
 said O O
 . O O
 
-he O O
+He O O
 estimated O O
 the O O
 company O O
@@ -20042,7 +20042,7 @@ residence O O
 . O O
 " O O
 
-he O O
+He O O
 told O O
 me O O
 that O O
@@ -20088,7 +20088,7 @@ the O O
 Kremlin B-LOC O
 . O B-LOC
 
-he O O
+He O O
 took O O
 over O O
 there O O
@@ -20311,7 +20311,7 @@ the O O
 country O O
 . O O
 
-he O O
+He O O
 said O O
 he O O
 had O O
@@ -20586,7 +20586,7 @@ Tolonics I-PER B-ORG
 . O I-ORG
 " O O
 
-he O O
+He O O
 expect O O
 a O O
 larger-than-average O O
@@ -22535,7 +22535,7 @@ on O O
 Friday O O
 . O O
 
-he O O
+He O O
 was O O
 responding O O
 to O O
@@ -22919,7 +22919,7 @@ witnesses O O
 said O O
 . O O
 
-he O O
+He O O
 said O O
 police O O
 and O O
@@ -23048,7 +23048,7 @@ in O O
 jail O O
 . O O
 
-he O O
+He O O
 were O O
 among O O
 500 O O
@@ -23165,7 +23165,7 @@ clashes O O
 . O O
 
 " O O
-he O O
+He O O
 are O O
 now O O
 back O O
@@ -23228,7 +23228,7 @@ witnesses O O
 said O O
 . O O
 
-he O O
+He O O
 were O O
 singing O O
 peacefully O O
@@ -23286,7 +23286,7 @@ Kyi I-PER I-PER
 was O O
 restricted O O
 to O O
-his O O
+him O O
 home O O
 by O O
 the O O
@@ -23294,7 +23294,7 @@ military O O
 government O O
 to O O
 prevent O O
-his O O
+him O O
 from O O
 being O O
 drawn O O
@@ -23303,7 +23303,7 @@ the O O
 protests O O
 . O O
 
-he O O
+He O O
 was O O
 allowed O O
 to O O
@@ -23399,7 +23399,7 @@ military O O
 government O O
 . O O
 
-he O O
+He O O
 told O O
 Reuters B-ORG B-ORG
 he O O
@@ -24573,8 +24573,8 @@ views O O
 on O O
 ( O O
 U.S. B-ORG B-LOC
-Treasury I-ORG I-ORG
-Secretary O I-ORG
+Treasury I-ORG I-LOC
+Secretary O I-LOC
 Robert B-PER I-ORG
 ) O I-ORG
 Rubin B-PER O
@@ -24584,7 +24584,7 @@ were O B-PER
 indeed O O
 what O O
 he O O
-themself O O
+himself O O
 thinks O O
 about O O
 the O O
@@ -24778,7 +24778,7 @@ down O O
 sharply O O
 . O O
 
-he O O
+He O O
 had O O
 said O O
 then O O
@@ -25256,7 +25256,7 @@ Jewish B-MISC O
 state O O
 . O O
 
-he O O
+He O O
 said O O
 Israel B-LOC B-LOC
 was O O
@@ -26322,7 +26322,7 @@ offered O O
 him O O
 . O O
 
-he O O
+He O O
 spent O O
 Thursday O O
 with O O
@@ -26848,7 +26848,7 @@ Voeks B-PER B-PER
 offered O O
 to O O
 give O O
-his O O
+him O O
 $ O O
 3,000 O O
 for O O
@@ -27997,7 +27997,7 @@ occasional O O
 " O O
 
 " O O
-he O O
+He O O
 enjoys O O
 the O O
 give O O
@@ -28290,7 +28290,7 @@ by O O
 children O O
 . O O
 
-he O O
+He O O
 also O O
 estimated O O
 that O O
@@ -28855,7 +28855,7 @@ the O O
 race O O
 . O O
 
-his O O
+His O O
 supporters O O
 said O O
 this O O
@@ -29163,7 +29163,7 @@ resolved O O
 . O O
 
 " O O
-he O O
+He O O
 did O O
 n't O O
 want O O
@@ -30317,7 +30317,7 @@ performing O O
 bonds O O
 . O O
 
-he O O
+He O O
 lost O O
 2.21 O O
 percent O O
@@ -30745,12 +30745,12 @@ spokesman O O
 said O O
 : O O
 " O O
-he O O
+He O O
 is O O
 resolute O O
 . O O
 
-he O O
+He O O
 is O O
 getting O O
 on O O
@@ -30978,7 +30978,7 @@ Snow B-PER O
 said O B-PER
 . O O
 
-he O O
+He O O
 said O O
 the O O
 cargo O O
@@ -31248,7 +31248,7 @@ to O O
 meet O O
 . O O
 
-he O O
+He O O
 last O O
 met O O
 in O O
@@ -31587,7 +31587,7 @@ some O O
 areas O O
 . O O
 
-he O O
+He O O
 can O O
 come O O
 in O O
@@ -32552,7 +32552,7 @@ news O O
 briefing O O
 . O O
 
-he O O
+He O O
 spoke O O
 after O O
 Rashid B-PER B-PER
@@ -32671,7 +32671,7 @@ in O I-ORG
 1982 O O
 . O O
 
-his O O
+His O O
 sentence O O
 had O O
 been O O
@@ -33140,7 +33140,7 @@ said O O
 . O O
 " O O
 
-he O O
+He O O
 announced O O
 he O O
 will O O
@@ -33461,7 +33461,7 @@ in O O
 cybersppace O O
 . O O
 
-he O O
+He O O
 too O O
 had O O
 never O O
@@ -34140,7 +34140,7 @@ Scalfaro B-PER O
 , O B-PER
 a O O
 northerner O O
-themself O O
+himself O O
 , O O
 said O O
 . O O
@@ -34221,7 +34221,7 @@ national O O
 unity O O
 . O O
 
-he O O
+He O O
 was O O
 jeered O O
 and O O
@@ -34403,7 +34403,7 @@ of O O
 1995/96 O O
 . O O
 
-he O O
+He O O
 said O O
 that O O
 the O O
@@ -34590,7 +34590,7 @@ Antwerp B-ORG O
 said O B-LOC
 . O O
 
-he O O
+He O O
 said O O
 a O O
 24-year-old O O
@@ -34649,7 +34649,7 @@ in O O
 Belgium B-LOC B-LOC
 . O O
 
-he O O
+He O O
 and O O
 the O O
 Turkish B-MISC O
@@ -34679,7 +34679,7 @@ spokesman O O
 said O O
 . O O
 
-he O O
+He O O
 said O O
 14 O O
 people O O
@@ -35583,7 +35583,7 @@ single-currency O O
 membership O O
 . O O
 
-his O O
+His O O
 statement O O
 was O O
 interpreted O O
@@ -36252,7 +36252,7 @@ Helen B-PER B-PER
 Clark I-PER I-PER
 . O O
 
-he O O
+He O O
 told O O
 Reuters B-ORG B-ORG
 he O O
@@ -36261,7 +36261,7 @@ needed O O
 to O O
 speak O O
 to O O
-his O O
+him O O
 before O O
 he O O
 left O O
@@ -36431,7 +36431,7 @@ New B-LOC O
 York I-LOC B-LOC
 . O I-LOC
 
-he O O
+He O O
 played O O
 an O O
 active O O
@@ -36479,7 +36479,7 @@ since O O
 1984 O O
 . O O
 
-he O O
+He O O
 was O O
 senior O O
 private O O
@@ -36508,7 +36508,7 @@ in O O
 1983 O O
 . O O
 
-his O O
+His O O
 previous O O
 posts O O
 include O O
@@ -36679,7 +36679,7 @@ in O O
 Rangoon B-LOC B-LOC
 . O O
 
-he O O
+He O O
 were O O
 later O O
 released O O
@@ -36716,7 +36716,7 @@ their O O
 demands O O
 . O O
 
-he O O
+He O O
 said O O
 he O O
 wanted O O
@@ -36900,7 +36900,7 @@ from O O
 cigarette O O
 smoke O O
 at O O
-his O O
+him O O
 grandfather O O
 's O O
 birthday O O
@@ -37286,7 +37286,7 @@ on O O
 Friday O O
 . O O
 
-he O O
+He O O
 said O O
 the O O
 GDP O O
@@ -37698,7 +37698,7 @@ source O O
 said O O
 . O O
 
-he O O
+He O O
 said O O
 Bre-X B-ORG B-ORG
 would O I-ORG
@@ -37950,7 +37950,7 @@ the O O
 companies O O
 . O O
 
-he O O
+He O O
 had O O
 said O O
 earlier O O
@@ -41183,7 +41183,7 @@ Cup I-MISC O
 standings O O
 . O O
 
-he O O
+He O O
 have O O
 104 O O
 points O O
@@ -41402,7 +41402,7 @@ Canada B-LOC B-LOC
 who O O
 picked O O
 up O O
-his O O
+him O O
 first O O
 career O O
 victory O O
@@ -41755,7 +41755,7 @@ insurance O O
 compnay O O
 and O O
 was O O
-themself O O
+himself O O
 an O O
 active O O
 cricketer O O
@@ -41809,7 +41809,7 @@ and O O
 1981 O O
 . O O
 
-his O O
+His O O
 first O O
 cricketing O O
 sojurn O O
@@ -41829,7 +41829,7 @@ in O O
 1976-77 O O
 . O O
 
-his O O
+His O O
 father O O
 Clarence B-PER B-PER
 Woolmer I-PER I-PER
@@ -49244,7 +49244,7 @@ the O O
 game O O
 . O O
 
-he O O
+He O O
 boast O O
 a O O
 nine-point O O
@@ -49335,7 +49335,7 @@ the O O
 season O O
 . O O
 
-he O O
+He O O
 are O O
 fourth O O
 in O O
@@ -49809,7 +49809,7 @@ December O O
 1995 O O
 . O O
 
-he O O
+He O O
 guided O O
 Ireland B-LOC B-LOC
 to O O
