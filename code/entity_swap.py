@@ -545,7 +545,7 @@ def sentences_to_lines(sentences: list):
         lines.append("\n")
     return lines
 
-def test_set_creator(region: str):
+def test_set_creator_person(region: str):
     """Helper function to create test sets for the person names 
     Parameters 
     ----------
@@ -566,9 +566,29 @@ def test_set_creator(region: str):
         os.makedirs(f"../data/person/{region.lower()}/testSets", exist_ok=True)
         export_swaps(swapped, f"../data/person/{region.lower()}/testSets/{region.lower()}_conll_{i+1}.iob2")
         print(f"Finished dataset {i+1} out of 10: Region = {region}")
+
+
+def test_set_creator_random():
+    """Helper function to create test sets for the randomized names
+    Parameters 
+    ----------
+
+    """
+    conll_file_path = "../data/test_conll.iob2"
+    lines = read_file(conll_file_path)
+    length_distribution = length_distribution_names(lines)
+    for i in range(10):
+        swapped = random_string_generation_swap(lines, length_distribution)
+        os.makedirs(f"../data/random/testSets", exist_ok=True)
+        export_swaps(swapped, f"../data/random/testSets/random_conll_{i+1}.iob2")
+        print(f"Finished dataset {i+1} out of 10") 
+
+
+
 if __name__ == "__main__":
     print("Hello World!")
-    # test_set_creator("indian")
+    test_set_creator_random()
+    # test_set_creator_person("indian")
     #conll_file_path = "../data/test_conll.iob2"
     #lines = read_file(conll_file_path)
     # swapped_list_endonym, swapped_list_latin = loc_replacer(lines, "../data/location_exonym_endonym/locations.iob2") 
