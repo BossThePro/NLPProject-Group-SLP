@@ -325,15 +325,15 @@ def random_string_generation_swap(line_list: list, distribution_dict: dict):
     """
     swapped_list = []
 
-    per_lengths = list(distribution_dict["PER"].keys())
-    org_lengths = list(distribution_dict["ORG"].keys())
+    # per_lengths = list(distribution_dict["PER"].keys())
+    # org_lengths = list(distribution_dict["ORG"].keys())
     loc_lengths = list(distribution_dict["LOC"].keys())
-    misc_lengths = list(distribution_dict["MISC"].keys())
+    # misc_lengths = list(distribution_dict["MISC"].keys())
 
-    per_counts = list(distribution_dict["PER"].values())
-    org_counts = list(distribution_dict["ORG"].values())
+    # per_counts = list(distribution_dict["PER"].values())
+    # org_counts = list(distribution_dict["ORG"].values())
     loc_counts= list(distribution_dict["LOC"].values())
-    misc_counts = list(distribution_dict["MISC"].values())
+    # misc_counts = list(distribution_dict["MISC"].values())
     for line in line_list:
 
         line = line.split()
@@ -342,25 +342,25 @@ def random_string_generation_swap(line_list: list, distribution_dict: dict):
             swapped_list.append("\n")
             continue
 
-        if line[2] == "B-PER" or line[2] == "I-PER":
-            word_len = random.choices(per_lengths, weights=per_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
-            swapped_list.append(" ".join(line))
+        # if line[2] == "B-PER" or line[2] == "I-PER":
+        #     word_len = random.choices(per_lengths, weights=per_counts, k=1)[0]
+        #     line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
+        #     swapped_list.append(" ".join(line))
 
-        elif line[2] == "B-ORG" or line[2] == "I-ORG":
-            word_len = random.choices(org_lengths, weights=org_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
-            swapped_list.append(" ".join(line))
-
+        # elif line[2] == "B-ORG" or line[2] == "I-ORG":
+        #     word_len = random.choices(org_lengths, weights=org_counts, k=1)[0]
+        #     line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
+        #     swapped_list.append(" ".join(line))
+        #
         elif line[2] == "B-LOC" or line[2] == "I-LOC":
             word_len = random.choices(loc_lengths, weights=loc_counts, k=1)[0]
             line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
             swapped_list.append(" ".join(line))
-
-        elif line[2] == "B-MISC" or line[2] == "I-MISC":
-            word_len = random.choices(misc_lengths, weights=misc_counts, k=1)[0]
-            line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
-            swapped_list.append(" ".join(line))
+        #
+        # elif line[2] == "B-MISC" or line[2] == "I-MISC":
+        #     word_len = random.choices(misc_lengths, weights=misc_counts, k=1)[0]
+        #     line[1] = "".join(random.choices(string.ascii_letters, k=int(word_len)))
+        #     swapped_list.append(" ".join(line))
             
         else:
             swapped_list.append(" ".join(line))
@@ -579,8 +579,8 @@ def test_set_creator_random():
     length_distribution = length_distribution_names(lines)
     for i in range(10):
         swapped = random_string_generation_swap(lines, length_distribution)
-        os.makedirs(f"../data/random/testSets", exist_ok=True)
-        export_swaps(swapped, f"../data/random/testSets/random_conll_{i+1}.iob2")
+        os.makedirs(f"../data/random_location/testSets", exist_ok=True)
+        export_swaps(swapped, f"../data/random_location/testSets/random_location_conll_{i+1}.iob2")
         print(f"Finished dataset {i+1} out of 10") 
 
 
