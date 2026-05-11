@@ -190,10 +190,10 @@ def evaluate_specific(file_path,ner_tag_measured):
         fp_ul += len(pred_spans) - overlap_ul
         fn_ul += len(gold_spans) - overlap_ul
         
-        if ner_tag_measured != False:
-            gold_spans = {i for i in gold_spans if i.split(":")[1] != ner_tag_measured}
-            pred_spans = {i for i in pred_spans if i.split(":")[1] != ner_tag_measured}
-
+        if ner_tag_measured != "False":
+            gold_spans = {i for i in gold_spans if i.split(":")[1] == ner_tag_measured}
+            pred_spans = {i for i in pred_spans if i.split(":")[1] == ner_tag_measured}
+            
         overlap = len(gold_spans.intersection(pred_spans))
         tp += overlap
         fp += len(pred_spans) - overlap
@@ -214,7 +214,7 @@ def evaluate_specific(file_path,ner_tag_measured):
 
     l_prec = 0.0 if precision_loose_tp + precision_loose_fp == 0 else precision_loose_tp/(precision_loose_tp+precision_loose_fp)
     l_rec = 0.0 if recall_loose_tp+recall_loose_fn == 0 else recall_loose_tp/(recall_loose_tp+recall_loose_fn)
-    l_f1 = 0.0 if prec+rec == 0.0 else 2 * (prec * rec) / (prec + rec)
+    l_f1 = 0.0 if l_prec+l_rec == 0.0 else 2 * (l_prec * l_rec) / (l_prec + l_rec)
 
     tp = tp_ul
     fp = fp_ul
@@ -222,7 +222,7 @@ def evaluate_specific(file_path,ner_tag_measured):
 
     ul_prec = 0.0 if tp+fp == 0 else tp/(tp+fp)
     ul_rec = 0.0 if tp+fn == 0 else tp/(tp+fn)
-    ul_f1 = 0.0 if prec+rec == 0.0 else 2 * (prec * rec) / (prec + rec)
+    ul_f1 = 0.0 if ul_prec+ul_rec == 0.0 else 2 * (ul_prec * ul_rec) / (ul_prec + ul_rec)
 
     return prec, rec, f1, l_rec, l_prec, l_f1, ul_rec, ul_prec, ul_f1
 
