@@ -10,8 +10,8 @@ model_multi = AutoModelForTokenClassification.from_pretrained("Davlan/bert-base-
 
 test_dir = "../TestSets"
 target_dir = "../predictions"
-categories = ["random_person", "random_location"]
-# "location_exonym_endonym","original_test","person","pronouns","gender_names", "random"
+categories = ["random_person", "random_location","location_exonym_endonym","original_test","person","pronouns","gender_names", "random","typos","typos_loc","typos_entity"]
+
 def read_iob2_file(path):
     """
     Read provided Universal NER iob2 file

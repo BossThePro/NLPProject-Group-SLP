@@ -1,6 +1,8 @@
 #This is similar to span_f1.py however it is adjusted so our prediction files can be compitable with the code
 #Just import the evaluate function into a jupyter notebook and run it with a file path and
 # you will have 9 different metrics for that file
+import os 
+import pandas as pd
 
 def readNlu(path):
     """Reads given iob2 file based on path, returns gold truth and predictions as seperate lists
@@ -225,6 +227,76 @@ def evaluate_specific(file_path,ner_tag_measured):
     ul_f1 = 0.0 if ul_prec+ul_rec == 0.0 else 2 * (ul_prec * ul_rec) / (ul_prec + ul_rec)
 
     return prec, rec, f1, l_rec, l_prec, l_f1, ul_rec, ul_prec, ul_f1
+
+if __name__ == "__main__":
+    directory = "../predictions"
+    folders = os.listdir(directory)
+
+    meta_data = []
+    for folder in folders:
+        models = os.listdir(os.path.join(directory,folder))
+        for model in models:
+            files = os.listdir(os.path.join(directory,folder,model))
+            for file in files:
+                path = os.path.join(directory,folder,model,file)
+                sub_category = file.split("_")[0]
+
+                meta_data.append({
+                    "folder" : folder,
+                    "model" : model,
+                    "file" : file,
+                    "path" : path,
+                    "sub_categories" : sub_category
+                })
+
+    df = pd.DataFrame(meta_data)
+
+    cat_2_ner = {'gender_names': 'PER',
+    'location_exonym_endonym': 'LOC',
+    'person': 'PER',
+    'pronouns': 'PER',
+    'random': False,
+    'random_location' : 'LOC',
+    'random_person' : 'PER',
+    'original_test': False,
+    'typos': False,
+    'typos_entity' : 'PER',
+    'typos_loc' : 'LOC'}
+
+    df['modified_ner'] = df["folder"].map(cat_2_ner)
+
+    df.to_csv("../file_metadata.csv")
+
+    metadata = pd.read_csv("../file_metadata.csv")
+
+    results_data = []
+    for i in range(len(metadata)):
+        file_path, modifed_ner = metadata["path"].iloc[i], metadata["modified_ner"].iloc[i]
+        folder, model, file, sub_categories = metadata["folder"].iloc[i], metadata["model"].iloc[i], metadata["file"].iloc[i], metadata["sub_categories"].iloc[i]
+
+        prec, rec, f1, l_rec, l_prec, l_f1, ul_rec, ul_prec, ul_f1 = evaluate_specific(file_path,modifed_ner)
+
+        results_data.append({
+            "folder" : folder,
+            "model" : model,
+            "modified_ner" : modifed_ner,
+            "sub_categories" : sub_categories,
+            "file" : file,
+            "path" : file_path,
+            "precision": prec,
+            "recall": rec,
+            "f1": f1,
+            "loose_precision": l_prec,
+            "loose_recall": l_rec,
+            "loose_f1": l_f1,
+            "unlabeled_precision": ul_prec,
+            "unlabeled_recall": ul_rec,
+            "unlabeled_f1": ul_f1
+            })
+
+    results = pd.DataFrame(results_data)
+
+    results.to_csv("../evaluation_results.csv")
 
         
 
